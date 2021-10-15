@@ -26,6 +26,8 @@
   <div id="web">
   </div>
 
+
+  <br><br>
   <p id="p">
     select * from edge e where e.edge_id = 2;
     <br>
@@ -56,7 +58,7 @@
   
   // <a href="./agent/etos-agent.zip.001" download>etos-agent.zip.001</a><br>
   for (let i = 1; i <= 8; i++) {
-    $('#agent').after(
+    $('#agent').append(
       $(`<a href="./patch/${ymd}/etos-agent.zip.00${i}" download>etos-agent.zip.00${i}</a><br>`)
     );
   }
