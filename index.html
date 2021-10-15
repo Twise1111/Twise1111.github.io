@@ -13,7 +13,6 @@
 
   <span>etos agent patch</span>
   <div id="agentComment">
-    패치가 되었습니다...<br> aaaaa <br>
   </div>
   <div id="agent">
   </div>
@@ -31,26 +30,56 @@
 
 
   <br><br>
-  <p id="p">
-    select * from edge e where e.edge_id = 2;
-    <br>
-    select * from edge_history eh where eh.edge_id = 2 order by last_modifed_by desc;
-    <br>
-    <br>
-    select * from edge_io ei where ei.edge_id = 2;
-    <br>
-    select * from edge_io_history eih where eih.edge_io_id in (select ei.edge_io_id from edge_io ei where ei.edge_id = 2) order by last_modifed_by desc;
-    <br>
-    <br>
-    select * from device d where d.edge_id = 2;
-    <br>
-    select * from device_history dh where dh.edge_id = 2 order by last_modifed_by desc;
-    <br>
-    <br>
-    select * from device_io di where di.device_id in (select d.device_id from device d where d.edge_id = 2);
-    <br>
-    select * from device_io_history dih where dih.device_io_id in ( select device_io_id from device_io di where di.device_id in (select d.device_id from device d where d.edge_id = 2) ) order by last_modifed_by desc;
-  </p>
+
+
+  <button class="btn01" onclick="document.getElementById('p').style.display=(document.getElementById('p').style.display=='block') ? 'none' : 'block';">+</button>
+
+  <pre id="p" style="display: none;">
+
+select * from edge e where e.edge_id = 2;
+select * from edge_history eh where eh.edge_id = 2 order by last_modified_date desc;
+
+
+select * from edge_io ei where ei.edge_id = 2;
+
+
+select * from edge_io_history eih;
+select * from edge_io_history eih where eih.edge_io_id in (select ei.edge_io_id from edge_io ei where ei.edge_id = 2) order by last_modified_date desc;
+
+
+select * from device d where d.edge_id = 2;
+select * from device_history dh order by last_modified_date desc;
+
+select * from device_history dh where dh.edge_id = 2 order by last_modified_date desc;
+
+
+select * from device_io di where di.device_id in (select d.device_id from device d where d.edge_id = 2);
+select * from device_io_history dih where dih.device_io_id in ( select device_io_id from device_io di where di.device_id in (select d.device_id from device d where d.edge_id = 2) ) order by last_modified_date desc;
+
+
+
+
+truncate device_io_history ;
+truncate device_io ;
+
+truncate device_history ;
+truncate device ;
+
+truncate edge_io_history ;
+truncate edge_io ;
+
+truncate edge_history ;
+truncate edge ;
+
+commit;
+
+
+truncate alarm_history ;
+truncate alarm ;
+commit;
+
+
+  </pre>
 
   
 </body>
@@ -60,16 +89,28 @@
   let ymd = '2021_10_18';
   
   // <a href="./agent/etos-agent.zip.001" download>etos-agent.zip.001</a><br>
-  for (let i = 1; i <= 8; i++) {
-    $('#agent').append(
-      $(`<a href="./patch/${ymd}/etos-agent.zip.00${i}" download>etos-agent.zip.00${i}</a><br>`)
-    );
-  }
+  // for (let i = 1; i <= 8; i++) {
+  //   $('#agent').append(
+  //     $(`<a href="./patch/${ymd}/etos-agent.zip.00${i}" download>etos-agent.zip.00${i}</a><br>`)
+  //   );
+  // }
 
   
 
   // <a href="./mon/etos-mon.zip.001" download>etos-mon.zip.001</a><br>
-  
+  // for (let i = 1; i <= 8; i++) {
+  //   $('#agent').append(
+  //     $(`<a href="./patch/${ymd}/etos-mon.zip.00${i}" download>etos-mon.zip.00${i}</a><br>`)
+  //   );
+  // }
+
+
+
+  // for (let i = 1; i <= 8; i++) {
+  //   $('#agent').append(
+  //     $(`<a href="./patch/${ymd}/etos-mon.zip.00${i}" download>etos-mon.zip.00${i}</a><br>`)
+  //   );
+  // }
 
 
 
