@@ -7,41 +7,56 @@
   <title>Etos Patch</title>
   <script src="./assets/js/vendor/jquery-1.9.1.min.js"></script>
   <link href="./assets/css/test.css" rel="stylesheet" type="text/css">
+
+  <style>
+    span {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  
-
-  <span>etos agent patch</span>
-  <div id="agentComment">
-  </div>
-  <div id="agent">
-  </div>
 
   <br><br>
   <span>etos manager patch</span>
-  <div id="manager">
+  <div>
+    <ol id="manager"></ol>
   </div>
-
 
   <br><br>
   <span>etos Web patch</span>
-  <div id="web">
+  <div>
+    <ol id="web"></ol>
   </div>
 
+  <br><br>
+  <span>etos agent patch</span>
+  <div>
+    <ol id="agent">
+    </ol>
+  </div>
 
   <br><br>
-
-
   <button class="btn01" onclick="document.getElementById('p').style.display=(document.getElementById('p').style.display=='block') ? 'none' : 'block';">+</button>
-
   <pre id="p" style="display: none;">
+select * from edge;
+select edge_id, edge_name, action, last_modifed_by , last_modified_date from edge_history eh order by last_modified_date desc;
+
+select * from edge_io;
+select edge_io_id, edge_io_type , action, last_modifed_by , last_modified_date from edge_io_history eih order by last_modified_date desc;
+
+select * from device d ;
+select device_id , device_name , device_type , edge_id , action, last_modifed_by , last_modified_date from device_history dh order by last_modified_date desc;
+
+select * from device_io di ;
+select device_io_id , edge_io_id , edge_io_type , action, last_modifed_by , last_modified_date from device_io_history dih order by last_modified_date desc;
+
+--
 
 select * from edge e where e.edge_id = 2;
 select * from edge_history eh where eh.edge_id = 2 order by last_modified_date desc;
 
-
 select * from edge_io ei where ei.edge_id = 2;
-
 
 select * from edge_io_history eih;
 select * from edge_io_history eih where eih.edge_io_id in (select ei.edge_io_id from edge_io ei where ei.edge_id = 2) order by last_modified_date desc;
@@ -78,7 +93,6 @@ truncate alarm_history ;
 truncate alarm ;
 commit;
 
-
   </pre>
 
   
@@ -88,29 +102,11 @@ commit;
 
   let ymd = '2021_10_18';
   
-  // <a href="./agent/etos-agent.zip.001" download>etos-agent.zip.001</a><br>
-  // for (let i = 1; i <= 8; i++) {
-  //   $('#agent').append(
-  //     $(`<a href="./patch/${ymd}/etos-agent.zip.00${i}" download>etos-agent.zip.00${i}</a><br>`)
-  //   );
-  // }
-
-  
-
-  // <a href="./mon/etos-mon.zip.001" download>etos-mon.zip.001</a><br>
-  // for (let i = 1; i <= 8; i++) {
-  //   $('#agent').append(
-  //     $(`<a href="./patch/${ymd}/etos-mon.zip.00${i}" download>etos-mon.zip.00${i}</a><br>`)
-  //   );
-  // }
-
-
-
-  // for (let i = 1; i <= 8; i++) {
-  //   $('#agent').append(
-  //     $(`<a href="./patch/${ymd}/etos-mon.zip.00${i}" download>etos-mon.zip.00${i}</a><br>`)
-  //   );
-  // }
+  for (let i = 1; i <= 8; i++) {
+    $('#agent').append(
+      $(`<li><a href="./patch/${ymd}/etos-agent.zip.00${i}" download>etos-agent.zip.00${i}</a></li>`)
+    );
+  }
 
 
 
