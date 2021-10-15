@@ -35,22 +35,39 @@
 
   <p id="p">
     select * from edge e where e.edge_id = 2;
+    <br>
     select * from edge_history eh where eh.edge_id = 2 order by last_modifed_by desc;
-  
-  
+    <br>
+    <br>
     select * from edge_io ei where ei.edge_id = 2;
+    <br>
     select * from edge_io_history eih where eih.edge_io_id in (select ei.edge_io_id from edge_io ei where ei.edge_id = 2) order by last_modifed_by desc;
-  
-  
+    <br>
+    <br>
     select * from device d where d.edge_id = 2;
+    <br>
     select * from device_history dh where dh.edge_id = 2 order by last_modifed_by desc;
-  
-  
-    select * from device_io di where di.device_id in (select d.device_id from device d where d.edge_id = 2);
+    <br>
+    <br>
+    select * from device_io di where di.device_id in (select d.device_id from device d where d.edge_id = 2);\
+    <br>
     select * from device_io_history dih where dih.device_io_id in ( select device_io_id from device_io di where di.device_id in (select d.device_id from device d where d.edge_id = 2) ) order by last_modifed_by desc;
   </p>
 
   
 </body>
+
+<script>
+
+  $("#go").click(() => {
+  $("p").text(null);
+  var n = $("#size").val();
+  hn(n, 1, 3);
+  });
+
+
+
+</script>
+
 
 </html>
