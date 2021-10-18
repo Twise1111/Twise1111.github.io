@@ -18,6 +18,19 @@
 <body>
 
   <br><br>
+  <span>patch 내역</span>
+  <div>
+    <pre>
+# 화면
+  - Dashboard > Edge Monitor 
+      - Mouse over시 ip, area, rack 정보 display
+  - Configuration 
+      - box name 수정 기능 추가
+      - box 삭제 기능 추가
+    </pre>
+  </div>
+  
+  <br><br>
   <span>etos manager patch</span>
   <div>
     <ol id="manager"></ol>
@@ -100,19 +113,19 @@ commit;
 
 <script>
 
-  // let ymd = '2021_10_18';
+  let ymd = '2021_10_18';
   
-  // for (let i = 1; i <= 9; i++) {
-  //   $('#manager').append(
-  //     $(`<li><a href="./patch/${ymd}/etos-mon.zip.00${i}" download>etos-mon.zip.00${i}</a></li>`)
-  //   );
-  // }
+  for (let i = 1; i <= 9; i++) {
+    $('#manager').append(
+      $(`<li><a href="./patch/${ymd}/etos-mon.zip.00${i}" download>etos-mon.zip.00${i}</a></li>`)
+    );
+  }
   
-  // for (let i = 1; i <= 3; i++) {
-  //   $('#web').append(
-  //     $(`<li><a href="./patch/${ymd}/etos-cli-patch.zip.00${i}" download>etos-cli-patch.zip.00${i}</a></li>`)
-  //   );
-  // }
+  for (let i = 1; i <= 3; i++) {
+    $('#web').append(
+      $(`<li><a href="./patch/${ymd}/etos-cli-patch.zip.00${i}" download>etos-cli-patch.zip.00${i}</a></li>`)
+    );
+  }
 
   // for (let i = 1; i <= 8; i++) {
   //   $('#agent').append(
