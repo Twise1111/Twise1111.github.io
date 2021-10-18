@@ -26,6 +26,9 @@
       - box name 수정 기능 추가
       - box 삭제 기능 추가
 
+  - atos agent
+      - 로깅 추가
+
 # 패치 백업 
   - setup03/04.apps/etos-mon/etos-mon.jar 파일을 아래와 같이 backup 합니다.
     setup03/04.apps/etos-mon/bak/2021_10_18/etos-mon.jar 
@@ -60,9 +63,21 @@
   <br><br>
   <span>etos agent patch (box status collector)</span>
   <div>
-    패치 없음
     <ol id="agent">
     </ol>
+
+    <pre>
+modbus:
+  partition-count: 100
+  port: 502
+  connection-time-out: 1000
+  so-time-out: 1000 # 설정을 하지 않으려면 음수 값을 지정하면 된다.
+  edge-status: 1
+  memory:
+    os-state: 1
+    err-state: 9
+    port-state: 10
+    </pre>
   </div>
 
   <br><br>
@@ -143,11 +158,11 @@ commit;
     );
   }
 
-  // for (let i = 1; i <= 8; i++) {
-  //   $('#agent').append(
-  //     $(`<li><a href="./patch/${ymd}/etos-agent.zip.00${i}" download>etos-agent.zip.00${i}</a></li>`)
-  //   );
-  // }
+  for (let i = 1; i <= 8; i++) {
+    $('#agent').append(
+      $(`<li><a href="./patch/${ymd}/etos-agent.zip.00${i}" download>etos-agent.zip.00${i}</a></li>`)
+    );
+  }
 
 
 
