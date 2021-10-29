@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wireshark</title>
+  <script src="./assets/js/vendor/jquery-1.9.1.min.js"></script>
+  <link href="./assets/css/test.css" rel="stylesheet" type="text/css">
+
+  <style>
+    span {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <span>와이어샤크 이용하여 패킷 모니터링 하는 자료 송부</span>
+  <div>
+    <pre>
+1. 현장에서 패킷 모니터링한 파일 반출이 가능 하다면
+-> Wireshark 사용법_파일로 저장 자료 참고하시어 모니터링 후 저장하면 됩니다.
+
+2. 현장에서 상황만 모니터링이 가능하다면
+-> Wireshark 사용법_패킷 분석 자료를 참고 하시어
+필터링 하는 패킷량 % 와 수량을 확인 해 주시면 됩니다.
+    </pre>
+  </div>
+  
+  <br><br>
+  <span>Wireshark document</span>
+
+  <div>
+    <ol>
+      <li><a href="./wireshark/Wireshark 사용법_패킷 분석.pdf" download>Wireshark 사용법_패킷 분석</a></li>
+      <li><a href="./wireshark/Wireshark 사용법_파일로 저장.pdf" download>Wireshark 사용법_파일로 저장</a></li>
+    </ol>
+  </div>
+  
+  <br><br>
+  <span>Wireshark download</span>
+  <div>
+    <ol id="wireshark"></ol>
+  </div>
+  
+</body>
+
+<script>
+
+  for (let i = 1; i <= 12; i++) {
+    if (i < 10) {
+      $('#wireshark').append(
+        $(`<li><a href="./wireshark/Wireshark-win64-3.4.0.zip.00${i}" download>Wireshark-win64-3.4.0.zip.00${i}</a></li>`)
+      );
+    }
+    else {
+      $('#wireshark').append(
+        $(`<li><a href="./wireshark/Wireshark-win64-3.4.0.zip.0${i}" download>Wireshark-win64-3.4.0.zip.0${i}</a></li>`)
+      );
+    }
+    
+  }
+
+</script>
+
+
+</html>
