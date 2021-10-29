@@ -76,11 +76,15 @@
     </ol>
 
     <pre>
+
+cmd 파일에서 jar 파일명 변경을 하거나, cmd 파일을 추가 필요
+
 modbus:
   partition-count: 100
   port: 502
   connection-time-out: 1000
   so-time-out: 1000 # 설정을 하지 않으려면 음수 값을 지정하면 된다.
+  connection-sleep-time: 500 # 장비 1대 connection 맺은후 대기 시간
   edge-status: 1
   memory:
     os-state: 1
