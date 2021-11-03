@@ -53,6 +53,19 @@
   
   <br><br>
   <span>etos manager patch (java web app server)</span>
+  <pre>
+deviceio:
+  device-name-prefix:
+  device-type: SECS/HSMS
+  baud-rate: 115200
+  data-bits: 8
+  stop-bits: 1
+  parity: 0
+  port: 501 # 10001 부터 시작해서
+  port-delta: 1 # 1씩 증가 ************** 추가 할 것
+  app-mode: PASSIVE
+  app-addres: 0.0.0.0
+  </pre>
   <div>
     <ol id="manager"></ol>
   </div>
