@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etos Patch</title>
+  <script src="./assets/js/vendor/jquery-1.9.1.min.js"></script>
+  <link href="./assets/css/test.css" rel="stylesheet" type="text/css">
+
+  <style>
+    span {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div><a href="./LICENSE">LICENSE</a></div>
+  
+  <a href="./etos_rd/ETOS-RD 사용자 설명서.pdf" download>ETOS-RD 사용자 설명서</a>
+  <br>
+  <br><br>
+  <span>etos rd</span>
+  <div>
+    <ol id="rd">
+    </ol>
+  </div>
+  
+</body>
+
+<script>
+
+    for (let i = 1; i <= 8; i++) {
+      if (i < 10) {
+        $('#rd').append(
+          $(`<li><a href="./etos_rd/ETOS-RD_v2.50(2021.09.07).zip.00${i}" download>ETOS-RD_v2.50(2021.09.07).zip.00${i}</a></li>`)
+        );
+      }
+      else {
+        $('#rd').append(
+          $(`<li><a href="./etos_rd/ETOS-RD_v2.50(2021.09.07).zip.0${i}" download>ETOS-RD_v2.50(2021.09.07).zip.0${i}</a></li>`)
+        );
+      }
+    }
+</script>
+
+
+</html>
