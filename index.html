@@ -19,28 +19,26 @@
 
   <div><a href="./LICENSE">LICENSE</a></div>
 
-  <span>2021-10-18  patch 내역</span>
+  <span>2021-11-17  patch 내역</span>
   <div>
     <pre>
 # 패치 내역
   - 화면 : Dashboard > Edge Monitor 
-      - Mouse over시 ip, area, rack 정보 display
-  - 화면 : Configuration 
-      - box name 수정 기능 추가
-      - box 삭제 기능 추가
-
+      - Mouse click시 ip, area, rack 정보 display
+  - etos-mon
+      - 기준정보 변경시 반영 안되는 bug fix
   - etos agent
-      - 로깅 추가
+      - single thread > multi thread 방식으로 변경
 
 # 패치 백업 
   - setup03/04.apps/etos-mon/etos-mon.jar 파일을 아래와 같이 backup 합니다.
-    setup03/04.apps/etos-mon/bak/2021_10_18/etos-mon.jar 
+    setup03/04.apps/etos-mon/bak/etos-mon_2021_11-17.jar 
     
-    - setup03/04.apps/etos-cli 디렉토리를 압축하고, 압축한 파일을 아래 경로에 backup 합니다.
-    setup03/04.apps/etos-cli-bak/2021_10_18/ 
+  - setup03/04.apps/etos-cli 디렉토리를 압축하고, 압축한 파일을 아래 경로에 backup 합니다.
+    setup03/04.apps/etos-cli-bak/2021_11-17/ 
 
-    - setup03/04.apps/etos-agent/etos-agent.jar 파일을 아래와 같이 backup 합니다.
-      setup03/04.apps/etos-agent/bak/2021_10_18/etos-agent.jar 
+  - setup03/04.apps/etos-agent/etos-agent.jar 파일을 아래와 같이 backup 합니다.
+      setup03/04.apps/etos-agent/bak/etos-agent_2021_11-17.jar 
 
 # process start/stop시 유의사항
   - ETOS-MANAGER 프로세스는 1개만 운영되어야 합니다. "windows 작업관리자"에서 반드시 확인하세요.
@@ -57,17 +55,6 @@
   <br><br>
   <span>etos manager patch (java web app server)</span>
   <pre>
-deviceio:
-  device-name-prefix:
-  device-type: SECS/HSMS
-  baud-rate: 115200
-  data-bits: 8
-  stop-bits: 1
-  parity: 0
-  port: 501 # 10001 부터 시작해서 ************** 변경 할 것
-  port-delta: 1 # 1씩 증가 ************** 추가 할 것
-  app-mode: PASSIVE
-  app-addres: 0.0.0.0
   </pre>
   <div>
     <ol id="manager"></ol>
@@ -85,30 +72,7 @@ deviceio:
     <ol id="agent">
     </ol>
 
-  <br><br>
-  <span>etos agent patch (version 2, connection oriented)</span>
-  <pre>
 
-** cmd 파일에서 jar 파일명 변경을 하거나, cmd 파일을 추가 필요
-
-** fixedDelay 값을 20으로 변경 할 것 !!!
-
-modbus:
-  partition-count: 100
-  port: 502
-  connection-time-out: 1000
-  so-time-out: -1 # 설정을 하지 않으려면 음수 값을 지정하면 된다. ************** 확인 할 것
-  connection-sleep-time: 1000 # 장비 1대 connection 맺은후 대기 시간 ************** 확인 할 것
-  collect-device-history: false # device status history 수집 여부 ************** 확인 할 것
-  edge-status: 1
-  memory:
-    os-state: 1
-    err-state: 9
-    port-state: 10
-  </pre>
-  <div>
-    <ol id="agent_ori">
-    </ol>
 
   </div>
 
@@ -176,7 +140,7 @@ commit;
 
 <script>
 
-  let ymd = '2021_10_18';
+  let ymd = '2021_11_17';
   
   for (let i = 1; i <= 9; i++) {
     $('#manager').append(
@@ -193,14 +157,6 @@ commit;
   for (let i = 1; i <= 8; i++) {
     $('#agent').append(
       $(`<li><a href="./patch/${ymd}/etos-agent.zip.00${i}" download>etos-agent.zip.00${i}</a></li>`)
-    );
-  }
-
-
-  ymd = "2021_10_29"
-  for (let i = 1; i <= 8; i++) {
-    $('#agent_ori').append(
-      $(`<li><a href="./patch/${ymd}/etos-agent-connori.zip.00${i}" download>etos-agent-connori.zip.00${i}</a></li>`)
     );
   }
 
