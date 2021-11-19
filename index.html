@@ -17,153 +17,86 @@
 </head>
 <body>
 
-  <div><a href="./LICENSE">LICENSE</a></div>
-
-  <span>2021-11-17  patch 내역</span>
   <div>
+    <a href="./LICENSE">LICENSE</a>
     <pre>
-# 패치 내역
-  - 화면 : 
-      - Dashboard > Edge Monitor
-        - Mouse click시 ip, area, rack 정보 display
-      - Configuration
-        - edge 삭제 기능 추가
-        - edge 등록시 active 비활성화 되도록 수정
-        - edge 등록시 모든 정보가 한번에 등록 되도록 수정
-  - etos-mon
-      - 기준정보 변경시 반영 안되는 bug fix
-  - etos agent
-      - single thread > multi thread 방식으로 변경
+본 경로에 있는 모든 파일에 대해 사용을 금지합니다.
+본 경로에 있는 모든 파일에 대한 다운로드를 금지합니다.
+사용하려면, 저작자의 허가를 득해야 합니다.
+다운로드를 하려면, 저작자의 허가를 득해야 합니다.
 
-# 패치 백업 
-  - setup03/04.apps/etos-mon/etos-mon.jar 파일을 아래와 같이 backup 합니다.
-    setup03/04.apps/etos-mon/bak/etos-mon_2021_11-17.jar 
-    
-  - setup03/04.apps/etos-cli 디렉토리를 압축하고, 압축한 파일을 아래 경로에 backup 합니다.
-    setup03/04.apps/etos-cli-bak/2021_11-17/ 
+Use of all files in this path is prohibited.
+Downloading of any files in this path is prohibited.
+To use it, you must obtain permission from the author.
+To download, you must obtain permission from the author.
 
-  - setup03/04.apps/etos-agent/etos-agent.jar 파일을 아래와 같이 backup 합니다.
-      setup03/04.apps/etos-agent/bak/etos-agent_2021_11-17.jar 
-
-# process start/stop시 유의사항
-  - ETOS-MANAGER 프로세스는 1개만 운영되어야 합니다. "windows 작업관리자"에서 반드시 확인하세요.
-  - ETOS_AGENT 프로세스는 1개만 운영되어야 합니다. "windows 작업관리자"에서 반드시 확인하세요.
+Copyrights © 2021 All Rights Reserved by T-wise Inc.
     </pre>
-    <img src="assets/java_proc.png" />
-    <pre>
-# web 화면 변경이 안될경우
-  - ctrl+shift+r 버튼(chrome 캐시초기화)을 눌러 변경된 화면을 확인 할 수 있습니다.
+  </div>
 
-    </pre>
+  <div>
+    <div style="font-weight: bold; size: 20;">패치 링크</div>
+    <div>
+      <a href="./patch/2021_11_17.html" style="margin-left: 20px;" >GO 2021-11-17 patch</a>
+    </div>
   </div>
   
-  <br><br>
-  <span>etos manager patch (java web app server)</span>
-  <pre>
-  </pre>
-  <div>
-    <ol id="manager"></ol>
+  <div style="margin-top: 20px;">
+    <div style="font-weight: bold; size: 20;">패치 시 유의사항</div>
+
+    <div style="margin-top: 10px; margin-left: 20px; font-weight: bold; size: 20; color: blue;">1. ETOS_AGENT 운영시 주의점</div>
+      <div style="font-weight: bold; size: 12; margin-left: 40px; margin-top: 10px;">1.1 ETOS_AGENT 종료 요령</div>
+      <pre>
+        ETOS_AGENT 종료시 아래 그림과 같이 <span style="color: red; font-weight: bold; font-size: 12;">agent sleep start</span> 로그가 찍혔을 때
+        종료 하도록 합니다. agent sleep 대기 시간은 5초로 되어 있습니다.
+      </pre>
+      <img src="assets/agent.png" />
+
+
+      <div style="font-weight: bold; size: 12; margin-left: 40px; margin-top: 10px;">1.2 ETOS 화면에서 BOX activate 요령 </div>
+      <pre>
+        <span style="color: red; font-weight: bold; font-size: 12;">아래 절차를 반드시 지켜야 하는 이유</span>
+        ETOS BOX 상태 수집은 modbus로 수집한다. agent는 fab내 모든 BOX에 대해 상태 수집을 하기에,
+        기동시 순간적으로 모든 BOX에 대해 connection을 맺게 되는데, 이러한 행위가 BOX에 장애를 일으키는 요인으로 추측된다.
+        하여 패치된 AGENT는 각 BOX connection을 한대씩 순차적으로 1초의 대기시간 후 접속한다.
+        
+        AGENT는 BOX 기준정보상 ACTIVE 상태인 것만 수집 하는데, 잘못설정된 IP로 ACTIVE 등록 할 경우,
+        BOX 전체에 대해 장애를 일으키는 요인이 될 수 있다. 
+        
+        결국, 정상 ip 할당 된 box에 대해 ACTIVE 설정 하여, 운영해야 한다.
+        그리고, 여러 BOX를 신규 등록하여 운영 한다면, 1대씩 시간 간격을 두고 ACTIVE 하도록 한다.
+
+        <span style="color: red; font-weight: bold; font-size: 12;">기준정보 관리 요령</span>
+        1. 현장에 ETOS BOX가 운영되고 있는지 확인 합니다. 
+           (ETOS-RD프로그램으로 BOX software 21.07.14 version 확인, ping test)
+        2. ETOS 관리 화면에서 ETOS BOX 등록 시, ACTIVE 상태 여부를 1번 수행 결과에 따라 결정 합니다.
+           (ETOX BOX 등록 화면에서, 현재 ACTIVE 체크 항목은 default로 체크 되어 있지 않습니다.)
+        
+      </pre>
+
+
+    <div style="margin-top: 10px; margin-left: 20px; font-weight: bold; size: 20; color: blue;">2. Java Process start/stop시 java process 갯수 확인</div>
+
+    <div style="margin-left: 40px;">
+      <pre>
+  - ETOS-MANAGER 프로세스는 1개만 운영되어야 합니다. "windows 작업관리자"에서 반드시 확인하세요.
+  - ETOS_AGENT 프로세스는 1개만 운영되어야 합니다. "windows 작업관리자"에서 반드시 확인하세요.
+      </pre>
+      <img src="assets/java_proc.png" />
+      <pre>
+  # web 화면 변경이 안될경우
+    - ctrl+shift+r 버튼(chrome 캐시초기화)을 눌러 변경된 화면을 확인 할 수 있습니다.
+      </pre>
+    </div>
   </div>
-
-  <br><br>
-  <span>etos Web patch</span>
-  <div>
-    <ol id="web"></ol>
-  </div>
-
-  <br><br>
-  <span>etos agent patch (box status collector)</span>
-  <div>
-    <ol id="agent">
-    </ol>
-
-
-
-  </div>
-
-  <br><br>
-  <div class="btn01" onclick="document.getElementById('p').style.display=(document.getElementById('p').style.display=='block') ? 'none' : 'block';">+</div>
-  <pre id="p" style="display: none;">
-select * from edge;
-select edge_id, edge_name, action, last_modifed_by , last_modified_date from edge_history eh order by last_modified_date desc;
-
-select * from edge_io;
-select edge_io_id, edge_io_type , action, last_modifed_by , last_modified_date from edge_io_history eih order by last_modified_date desc;
-
-select * from device d ;
-select device_id , device_name , device_type , edge_id , action, last_modifed_by , last_modified_date from device_history dh order by last_modified_date desc;
-
-select * from device_io di ;
-select device_io_id , edge_io_id , edge_io_type , action, last_modifed_by , last_modified_date from device_io_history dih order by last_modified_date desc;
-
---
-
-select * from edge e where e.edge_id = 2;
-select * from edge_history eh where eh.edge_id = 2 order by last_modified_date desc;
-
-select * from edge_io ei where ei.edge_id = 2;
-
-select * from edge_io_history eih;
-select * from edge_io_history eih where eih.edge_io_id in (select ei.edge_io_id from edge_io ei where ei.edge_id = 2) order by last_modified_date desc;
-
-
-select * from device d where d.edge_id = 2;
-select * from device_history dh order by last_modified_date desc;
-
-select * from device_history dh where dh.edge_id = 2 order by last_modified_date desc;
-
-
-select * from device_io di where di.device_id in (select d.device_id from device d where d.edge_id = 2);
-select * from device_io_history dih where dih.device_io_id in ( select device_io_id from device_io di where di.device_id in (select d.device_id from device d where d.edge_id = 2) ) order by last_modified_date desc;
-
-
-
-
-truncate device_io_history ;
-truncate device_io ;
-
-truncate device_history ;
-truncate device ;
-
-truncate edge_io_history ;
-truncate edge_io ;
-
-truncate edge_history ;
-truncate edge ;
-
-commit;
-
-
-truncate alarm_history ;
-truncate alarm ;
-commit;
-
-  </pre>
+  
 
   
 </body>
 
 <script>
 
-  let ymd = '2021_11_17';
-  
-  for (let i = 1; i <= 9; i++) {
-    $('#manager').append(
-      $(`<li><a href="./patch/${ymd}/etos-mon.zip.00${i}" download>etos-mon.zip.00${i}</a></li>`)
-    );
-  }
-  
-  for (let i = 1; i <= 3; i++) {
-    $('#web').append(
-      $(`<li><a href="./patch/${ymd}/etos-cli-patch.zip.00${i}" download>etos-cli-patch.zip.00${i}</a></li>`)
-    );
-  }
-
-  for (let i = 1; i <= 8; i++) {
-    $('#agent').append(
-      $(`<li><a href="./patch/${ymd}/etos-agent.zip.00${i}" download>etos-agent.zip.00${i}</a></li>`)
-    );
-  }
+ 
 
 
 </script>

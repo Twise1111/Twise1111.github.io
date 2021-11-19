@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etos Patch</title>
+  <script src="../assets/js/vendor/jquery-1.9.1.min.js"></script>
+  <link href="../assets/css/test.css" rel="stylesheet" type="text/css">
+
+  <style>
+    span {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div><a href="./LICENSE">LICENSE</a></div>
+
+  <span>2021-11-17  patch 내역</span>
+  <div>
+    <pre>
+# 패치 내역
+  - 화면 : 
+      - Dashboard > Edge Monitor
+        - Mouse click시 ip, area, rack 정보 display
+      - Configuration
+        - edge 삭제 기능 추가
+        - edge 등록시 active 비활성화 되도록 수정
+        - edge 등록시 모든 정보가 한번에 등록 되도록 수정
+  - etos-mon
+      - 기준정보 변경시 반영 안되는 bug fix
+  - etos agent
+      - single thread > multi thread 방식으로 변경
+
+# 패치 백업 
+  - setup03/04.apps/etos-mon/etos-mon.jar 파일을 아래와 같이 backup 합니다.
+    setup03/04.apps/etos-mon/bak/etos-mon_2021_11-17.jar 
+    
+  - setup03/04.apps/etos-cli 디렉토리를 압축하고, 압축한 파일을 아래 경로에 backup 합니다.
+    setup03/04.apps/etos-cli-bak/2021_11-17/ 
+
+  - setup03/04.apps/etos-agent/etos-agent.jar 파일을 아래와 같이 backup 합니다.
+      setup03/04.apps/etos-agent/bak/etos-agent_2021_11-17.jar 
+      </pre>
+  </div>
+  
+  <br>
+  <span>etos manager patch (java web app server)</span>
+  <pre>
+  </pre>
+  <div>
+    <ol id="manager"></ol>
+  </div>
+
+  <br>
+  <span>etos Web patch</span>
+  <div>
+    <ol id="web"></ol>
+  </div>
+
+  <br>
+  <span>etos agent patch (box status collector)</span>
+  <div>
+    <ol id="agent">
+    </ol>
+  </div>
+</body>
+
+<script>
+
+  let ymd = '2021_11_17';
+  
+  for (let i = 1; i <= 9; i++) {
+    $('#manager').append(
+      $(`<li><a href="./${ymd}/etos-mon.zip.00${i}" download>etos-mon.zip.00${i}</a></li>`)
+    );
+  }
+  
+  for (let i = 1; i <= 3; i++) {
+    $('#web').append(
+      $(`<li><a href="./${ymd}/etos-cli-patch.zip.00${i}" download>etos-cli-patch.zip.00${i}</a></li>`)
+    );
+  }
+
+  for (let i = 1; i <= 8; i++) {
+    $('#agent').append(
+      $(`<li><a href="./${ymd}/etos-agent.zip.00${i}" download>etos-agent.zip.00${i}</a></li>`)
+    );
+  }
+
+
+</script>
+
+
+</html>
