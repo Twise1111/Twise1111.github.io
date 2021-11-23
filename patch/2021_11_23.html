@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etos Patch</title>
+  <script src="../assets/js/vendor/jquery-1.9.1.min.js"></script>
+  <link href="../assets/css/test.css" rel="stylesheet" type="text/css">
+
+  <style>
+    span {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div><a href="./LICENSE">LICENSE</a></div>
+
+  <span>2021-11-23  patch 내역</span>
+  <div>
+    <pre>
+# 패치 내역
+  - etos agent
+      - ping 방식으로 수정
+
+# 패치 백업
+  - setup03/04.apps/etos-agent/etos-agent.jar 파일을 아래와 같이 backup 합니다.
+      setup03/04.apps/etos-agent/bak/etos-agent_2021_11-23.jar 
+      </pre>
+  </div>
+  
+  <br>
+  <span>etos agent patch (box status collector)</span>
+  <div>
+    <pre>
+modbus:
+  partition-count: 100
+  port: 502
+  connection-time-out: 1000   ### 1000 설정 확인 !!!
+  connection-sleep-time: 100  ### 100 설정 확인 !!!
+  so-time-out: -1
+  edge-status: 1
+  collect-device-history: false
+  memory:
+    os-state: 1
+    err-state: 9
+    port-state: 10
+
+fixedDelay: 20 ### 20으로 수정 할 것
+    </pre>
+    <ol id="agent">
+    </ol>
+  </div>
+</body>
+
+<script>
+  let ymd = '2021_11_23';
+
+  for (let i = 1; i <= 8; i++) {
+    $('#agent').append(
+      $(`<li><a href="./${ymd}/etos-agent.zip.00${i}" download>etos-agent.zip.00${i}</a></li>`)
+    );
+  }
+</script>
+
+
+</html>
