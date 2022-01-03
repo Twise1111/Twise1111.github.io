@@ -1,0 +1,143 @@
+<html>
+
+<head>
+  <title></title>
+  <!--
+  <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+  -->
+  <script src="https://twise1111.github.io/assets/js/vendor/jquery-1.9.1.min.js"></script>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #header {
+      position: fixed;
+      top: 0;
+      left: 50px;
+      width: 100%;
+      height: 10%;
+    }
+
+    #console {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 90%;
+      background-color: black;
+      color: white;
+      font-size: 15px;
+    }
+
+    #runningFlag {
+      color: red;
+    }
+  </style>
+  <script type="text/javascript">
+    var endPoint = 0;
+    var tailFlag = false;
+    var fileName = "EAP01";
+    var consoleLog;
+    var runningFlag;
+
+
+
+    var timer = null;
+
+
+    const baseUrl = "http://192.168.0.105:8088/api/tails/";
+    
+    $(document).ready(function () {
+      consoleLog = $('#console');
+      runningFlag = $('#runningFlag');
+      function startTail() {
+        runningFlag.html('Running');
+        fileName = $('#fileName').val();
+
+
+        // grep = $.trim($('#grep').val());
+        // grepV = $.trim($('#grepV').val());
+        // pattern = new RegExp('.*' + grep + '.*\\n', 'g');
+        // patternV = new RegExp('.*' + grepV + '.*\\n', 'g');
+        function requestLog() {
+
+          if (tailFlag) {
+            $.ajax({
+              type: 'GET',
+              url: baseUrl + fileName + "/" + endPoint,
+              // type: 'POST',
+              // url: baseUrl,
+              // dataType: 'json',
+              // contentType: 'application/json',
+              // data: JSON.stringify( {
+              //   'fileName': fileName,
+              //   'preEndPoint': endPoint
+              // }),
+              success: function (data) {
+
+                
+
+                endPoint = data.endPoint == false ? 0 : data.endPoint;
+                logdata = decodeURIComponent(data.log);
+
+
+
+                // console.log(tailFlag, endPoint)      
+
+
+                consoleLog.val(consoleLog.val() + logdata);
+                consoleLog.scrollTop(consoleLog.prop('scrollHeight'));
+
+
+                timer = setTimeout(requestLog, 1000);
+              }
+            });
+          }
+        }
+        requestLog();
+      }
+      $('#startTail').on('click', function () { tailFlag = true; startTail(); });
+      
+      $('#stopTail').on('click', function () {
+        tailFlag = false;
+        runningFlag.html('Stop');
+          
+
+
+        if (timer !== 'undefined' && timer != null) {
+          console.log('clear timer');
+          clearTimeout(timer);
+        }
+
+      });
+
+      $('#clearLog').on('click', function () {
+        consoleLog.val('');
+      });
+      // $('#fileName').change(function () {
+      //   tailFlag = false;
+      //   endPoint = 0;
+      //   runningFlag.html('Stop');
+      // });
+    });
+  </script>
+</head>
+
+<body>
+  <div id="header">
+    <h2>Log Tail</h2>
+    <br />
+    
+    <input id="fileName" type="text" value="EAP01" />&nbsp;&nbsp;&nbsp;
+    <input id="startTail" type="button" value="startTail" />&nbsp;&nbsp;&nbsp;
+    <input id="stopTail" type="button" value="stopTail" />&nbsp;&nbsp;&nbsp;
+    <span id="runningFlag">Stop</span><br />
+
+    <input id="clearLog" type="button" value="clearLog" />
+
+  </div>
+  <textarea id="console"></textarea>
+</body>
+
+</html>
