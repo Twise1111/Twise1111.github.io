@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom URL Scheme Test</title>
+  <script src="../assets/js/vendor/jquery-1.9.1.min.js"></script>
+  <link href="../assets/css/test.css" rel="stylesheet" type="text/css">
+
+  <style>
+    span {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div><a href="./LICENSE">LICENSE</a></div>
+
+  <span>Custom URL Scheme Test</span>
+
+  <div>
+    <pre>
+      1. mstsc.bat 파일을 다운로드 받고, 아래와 같은 위치에 옮긴다.
+         C:\TWISE\rcs\mstsc.bat
+
+      2. registry.bat 파일을 다운로드 받고, 관리자 권한으로 실행한다.
+         (파일 선택 > 마우스 오른쪽 버튼 클릭 > 관리자 권한으로 실행)
+
+      3. RUN mstsc 클릭 한다.
+    </pre>
+  </div>
+
+  <div>
+    <ol>
+      <li><a href="assets/mstsc.bat" download>download mstsc.bat</a></li>
+      <li><a href="assets/registry.bat" download>download registry.bat</a></li>
+      
+      <li><a href="mymstsc://192.168.0.40/1200/1200">RUN mstsc</a></li>
+    </ol>
+  </div>
+</body>
+
+<script>
+  // let ymd = '2021_11_23';
+
+  // for (let i = 1; i <= 8; i++) {
+  //   $('#agent').append(
+  //     $(`<li><a href="./${ymd}/etos-agent.zip.00${i}" download>etos-agent.zip.00${i}</a></li>`)
+  //   );
+  // }
+</script>
+
+
+</html>
