@@ -23,34 +23,35 @@
 
   <div>
     <pre>
-      1. mstsc.bat 파일을 다운로드 받고, 아래와 같은 위치에 옮긴다.
-         C:\TWISE\rcs\mstsc.bat
 
-      2. registry.bat 파일을 다운로드 받고, 관리자 권한으로 실행한다.
+      1. registry.bat 파일을 다운로드 받고, 관리자 권한으로 실행한다.
          (파일 선택 > 마우스 오른쪽 버튼 클릭 > 관리자 권한으로 실행)
 
-      3. RUN mstsc 클릭 한다.
+      2. RUN RCS WIN EXE
     </pre>
   </div>
 
   <div>
     <ol>
-      <li><a href="assets/mstsc.bat" download>download mstsc.bat</a></li>
-      <li><a href="assets/registry.bat" download>download registry.bat</a></li>
+
+      <li><a href="assets/registry.bat" download>download rcs registry.bat</a></li>
       
-      <li><a href="mymstsc://192.168.0.40/1200/1200">RUN mstsc</a></li>
+      <li><a  href="javascript:void(0);" onclick="runWinEXE();">RUN RCS WIN EXE</a></li>
     </ol>
   </div>
 </body>
 
 <script>
-  // let ymd = '2021_11_23';
+  function runWinEXE() {
+    const arg = `43/5/M8/PHOTO/BAY1/M8PPPB10001/192.168.0.15/administrator/password/true/800/600/101K`
+    console.log(`run exe:${arg}`)
 
-  // for (let i = 1; i <= 8; i++) {
-  //   $('#agent').append(
-  //     $(`<li><a href="./${ymd}/etos-agent.zip.00${i}" download>etos-agent.zip.00${i}</a></li>`)
-  //   );
-  // }
+    const elink = document.createElement('a')
+    elink.style.display = 'none'
+    elink.href = `rcsviewer://${arg}`
+    document.body.appendChild(elink)
+    elink.click()
+  }
 </script>
 
 

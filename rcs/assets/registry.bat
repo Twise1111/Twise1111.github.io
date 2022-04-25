@@ -8,7 +8,7 @@ echo ######################################################################
 echo .
 echo .
 echo .
-reg.exe add "HKEY_CLASSES_ROOT\mymstsc" /v "URL Protocol" /d "" /f
-reg.exe add "HKEY_CLASSES_ROOT\mymstsc\shell\open\command" /v "" /d "C:\TWISE\rcs\mstsc.bat %%1" /f
+reg.exe add "HKEY_CLASSES_ROOT\rcsviewer" /v "URL protocol" /d "" /f
+reg.exe add "HKEY_CLASSES_ROOT\rcsviewer\shell\open\command" /v "" /d "C:\TWISE\RemoteViewer_v1.4\RemoteViewer_v1.4.exe %%1" /f
 echo .
 pause
