@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etos Patch</title>
+  <script src="../assets/js/vendor/jquery-1.9.1.min.js"></script>
+  <link href="../assets/css/test.css" rel="stylesheet" type="text/css">
+
+  <style>
+    span {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div><a href="./LICENSE">LICENSE</a></div>
+
+  <span>2022-07-04  init setup</span>
+  <div>
+    <pre>
+      rcs manager, rcs agent initial setup
+    </pre>
+  </div>
+  
+  <br>
+  <span>rcs database</span>
+  <div>
+    <pre>
+    </pre>
+    <ol id="rcs_database">
+      <li><a href="./2022_07_04/database.zip" download>database.zip</a></li>
+    </ol>
+  </div>
+  
+  <br>
+  <span>rcs agent</span>
+  <div>
+    <pre>
+    </pre>
+    <ol id="rcs_agent">
+    </ol>
+  </div>
+  
+  <br>
+  <span>rcs manager</span>
+  <div>
+    <pre>
+    </pre>
+    <ol id="rcs_manager">
+    </ol>
+  </div>
+  
+  <br>
+  <span>rcs web</span>
+  <div>
+    <pre>
+    </pre>
+    <ol id="rcs_web">
+    </ol>
+  </div>
+
+
+
+  <br>
+  <span>7z</span>
+  <div>
+    <pre>
+      </pre>
+    <ol id="7z">
+      <li><a href="./2022_07_04/7z2107-x64.msi" download>7z2107-x64.msi</a></li>
+    </ol>
+  </div>
+</body>
+
+<script>
+  let ymd = '2022_07_04';
+
+  for (let i = 1; i <= 8; i++) {
+    $('#rcs_agent').append(
+      $(`<li><a href="./${ymd}/rcs-agent.zip.00${i}" download>rcs-agent.zip.00${i}</a></li>`)
+    );
+  }
+
+  for (let i = 1; i <= 10; i++) {
+    if (i < 10) {
+      $('#rcs_manager').append(
+        $(`<li><a href="./${ymd}/rcs-mgr.zip.00${i}" download>rcs-mgr.zip.00${i}</a></li>`)
+      );
+    }
+    else {
+      $('#rcs_manager').append(
+        $(`<li><a href="./${ymd}/rcs-mgr.zip.0${i}" download>rcs-mgr.zip.0${i}</a></li>`)
+      );
+    }
+    
+  }
+
+  for (let i = 1; i <= 3; i++) {
+    $('#rcs_web').append(
+      $(`<li><a href="./${ymd}/web.zip.00${i}" download>web.zip.00${i}</a></li>`)
+    );
+  }
+
+
+
+
+</script>
+
+
+</html>
